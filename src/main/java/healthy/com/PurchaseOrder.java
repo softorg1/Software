@@ -5,9 +5,9 @@ import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 public class PurchaseOrder {
-    private String purchaseOrderId; // New field for a unique PO ID
+    private String purchaseOrderId;
     private String ingredientName;
-    private String supplierName; // Or Supplier object
+    private String supplierName;
     private int quantity;
     private String unit;
     private double pricePerUnit;
@@ -24,7 +24,7 @@ public class PurchaseOrder {
         this.unit = unit;
         this.pricePerUnit = pricePerUnit;
         this.totalCost = quantity * pricePerUnit;
-        this.orderDate = LocalDate.now(); // Default to current date
+        this.orderDate = LocalDate.now();
         this.status = "Generated"; // Default status
         this.automaticallyGenerated = auto;
     }

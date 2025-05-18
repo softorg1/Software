@@ -6,7 +6,7 @@ public class IngredientSupplierLink {
     private int defaultReorderQty;
     private String unit;
     private int criticalStockLevel;
-    private int currentStock; // This might be better managed in InventoryService/Ingredient
+    private int currentStock;
 
     public IngredientSupplierLink(String ingredientName, String supplierId, int defaultReorderQty, String unit, int criticalStockLevel, int currentStock) {
         this.ingredientName = ingredientName;

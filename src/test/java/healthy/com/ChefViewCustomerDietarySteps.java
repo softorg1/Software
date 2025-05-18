@@ -1,20 +1,17 @@
-package healthy.com; // أو healthy.com.stepdefinitions
+package healthy.com;
 
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.And;
 import io.cucumber.datatable.DataTable;
-import io.cucumber.java.Before; // Import Before hook
+import io.cucumber.java.Before;
 
-// import healthy.com.repository.CustomerRepository; // إذا كان CustomerRepository في نفس الحزمة، لا حاجة
-// import healthy.com.service.CustomerService;    // إذا كان CustomerService في نفس الحزمة، لا حاجة
-// import healthy.com.Customer;                   // إذا كان Customer في نفس الحزمة، لا حاجة
-// import healthy.com.Chef;                       // إذا كان Chef في نفس الحزمة، لا حاجة
 
-import java.io.IOException; // Added for IOException
-import java.nio.file.Files; // Added for Files
-import java.nio.file.Paths; // Added for Paths
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -31,10 +28,10 @@ public class ChefViewCustomerDietarySteps {
     private String systemMessageToChef;
 
 
-    @Before // This hook runs before each scenario
+    @Before
     public void setUp() {
         try {
-            // We are primarily interested in customer data here, ensure it's clean
+
             Files.deleteIfExists(Paths.get("src/main/resources/customers.txt"));
         } catch (IOException e) {
             System.err.println("Could not delete customers.txt before scenario in ChefViewSteps: " + e.getMessage());
@@ -70,7 +67,7 @@ public class ChefViewCustomerDietarySteps {
 
     @Given("a chef is logged into the system")
     public void a_chef_is_logged_into_the_system() {
-        this.currentChef = new Chef("DefaultChef"); // Create a dummy chef instance
+        this.currentChef = new Chef("DefaultChef");
         this.currentChef.setLoggedIn(true);
     }
 
@@ -111,14 +108,14 @@ public class ChefViewCustomerDietarySteps {
     @Then("the system should indicate to the chef that no dietary preferences are stored for this customer")
     public void the_system_should_indicate_to_the_chef_that_no_dietary_preferences_are_stored_for_this_customer() {
         assertThat(this.viewedCustomer).isNotNull();
-        assertThat(this.systemMessageToChef).isNull(); // Customer exists, but no preferences
+        assertThat(this.systemMessageToChef).isNull();
         assertThat(this.viewedCustomer.getDietaryPreferences()).isEmpty();
     }
 
     @And("the system should indicate to the chef that no allergies are stored for this customer")
     public void the_system_should_indicate_to_the_chef_that_no_allergies_are_stored_for_this_customer() {
         assertThat(this.viewedCustomer).isNotNull();
-        assertThat(this.systemMessageToChef).isNull(); // Customer exists, but no allergies
+        assertThat(this.systemMessageToChef).isNull();
         assertThat(this.viewedCustomer.getAllergies()).isEmpty();
     }
 

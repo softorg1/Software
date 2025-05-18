@@ -223,7 +223,7 @@ public class IngredientSubstitutionSteps {
     @Then("the system should indicate to {string} that ingredient {string} is currently out of stock")
     public void the_system_should_indicate_to_that_ingredient_is_currently_out_of_stock(String email, String ingredientName) {
         assertThat(this.currentCustomerEmailForSubstitution).isEqualTo(email);
-        assertThat(this.currentMealForSubstitution).isNotNull(); // Ensure meal object exists
+        assertThat(this.currentMealForSubstitution).isNotNull();
         assertThat(this.currentMealForSubstitution.infoMessage).isEqualTo("ingredient " + ingredientName + " is currently out of stock");
     }
 
@@ -243,7 +243,7 @@ public class IngredientSubstitutionSteps {
 
     @And("{string} should not receive a substitution alert for this specific interaction")
     public void should_not_receive_a_substitution_alert_for_this_specific_interaction(String chefName) {
-        // Parameter chefName is not used here for verification based on current logic
+
         assertThat(this.currentMealForSubstitution).isNotNull();
         if (this.currentMealForSubstitution.lastAttemptedIngredient != null &&
                 this.currentMealForSubstitution.lastSuggestedAlternative != null &&

@@ -23,8 +23,8 @@ public class CustomerOrderReminderSteps {
 
     private OrderService orderService;
     private OrderRepository orderRepository;
-    private CustomerService customerService; // To ensure customer exists
-    private CustomerRepository customerRepository; // To ensure customer exists
+    private CustomerService customerService;
+    private CustomerRepository customerRepository;
 
     private Map<String, List<String>> customerNotifications;
     private LocalDate currentSystemDate;
@@ -50,20 +50,18 @@ public class CustomerOrderReminderSteps {
         List<Map<String, String>> rows = ordersTable.asMaps(String.class, String.class);
         for (Map<String, String> columns : rows) {
             String customerEmail = columns.get("Customer Email");
-            customerService.registerOrGetCustomer(customerEmail); // Ensure customer exists
+            customerService.registerOrGetCustomer(customerEmail);
 
             Order order = new Order(
                     columns.get("Order ID"),
                     customerEmail,
-                    columns.get("Delivery Date"), // This should match Order's orderDate
-                    "Scheduled" // Assuming upcoming orders are "Scheduled" or "Preparing"
+                    columns.get("Delivery Date"),
+                    "Scheduled"
             );
-            // For reminder purposes, we primarily need orderId, mealName, deliveryDate, timeWindow
-            // We can add a dummy OrderItem if Order class requires it.
+
             OrderItem item = new OrderItem(columns.get("Meal Name"), 1, 0, 0); // Dummy price/qty
             order.addItem(item);
-            // The deliveryTimeWindow from Gherkin isn't directly stored in Order object yet.
-            // We'll use it directly from the Gherkin data for constructing reminder message.
+
             orderRepository.saveOrder(order);
         }
     }
@@ -71,7 +69,7 @@ public class CustomerOrderReminderSteps {
     @Given("customer {string} is active in the system")
     public void customer_is_active_in_the_system(String customerEmail) {
         this.customerNotifications.putIfAbsent(customerEmail, new ArrayList<>());
-        customerService.registerOrGetCustomer(customerEmail); // Ensure customer is known
+        customerService.registerOrGetCustomer(customerEmail);
     }
 
     @Given("the current system date is {string}")
@@ -85,11 +83,6 @@ public class CustomerOrderReminderSteps {
         List<Order> ordersForTomorrow = orderService.getOrdersScheduledForDeliveryOn(tomorrow);
 
         for (Order order : ordersForTomorrow) {
-            // We need the deliveryTimeWindow, which is in the Gherkin but not directly in Order object.
-            // For this test, we'll have to reconstruct it or assume a way to get it.
-            // Let's find it from the original Gherkin setup if possible or use a placeholder.
-            // This highlights a potential need to store deliveryTimeWindow in the Order object.
-            // For now, let's find the original DataTable row (this is a bit of a hack for test setup).
             String deliveryTimeWindow = getDeliveryTimeWindowFromTestSetup(order.getOrderId());
 
             String message = String.format(
@@ -104,8 +97,7 @@ public class CustomerOrderReminderSteps {
     }
 
     private String getDeliveryTimeWindowFromTestSetup(String orderId) {
-        // This is a HACK for testing because deliveryTimeWindow is not in the Order model.
-        // In a real app, this info would be part of the Order.
+
         if("ORD-REM-001".equals(orderId)) return "18:00 - 19:00";
         if("ORD-REM-002".equals(orderId)) return "19:00 - 20:00";
         if("ORD-REM-003".equals(orderId)) return "12:00 - 13:00";

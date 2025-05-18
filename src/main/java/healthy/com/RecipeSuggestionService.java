@@ -9,8 +9,6 @@ import java.util.HashMap; // If used elsewhere, but not directly in this method 
 
 public class RecipeSuggestionService {
     private final RecipeRepository recipeRepository;
-    // private Recipe finalBestMatch; // We can remove this field if we pass the local variable
-
     public RecipeSuggestionService(RecipeRepository recipeRepository) {
         this.recipeRepository = recipeRepository;
     }
@@ -82,10 +80,10 @@ public class RecipeSuggestionService {
         }
 
         if (bestMatchCandidate != null) {
-            final Recipe currentBestMatch = bestMatchCandidate; // Use a local effectively final variable for the lambda
+            final Recipe currentBestMatch = bestMatchCandidate;
 
             String usedIngredientsString = preferences.availableIngredients.stream()
-                    .filter(ing -> currentBestMatch.getIngredients().contains(ing)) // Use currentBestMatch
+                    .filter(ing -> currentBestMatch.getIngredients().contains(ing))
                     .sorted()
                     .collect(Collectors.joining(", "));
 

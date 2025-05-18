@@ -17,7 +17,7 @@ public class RecipeRepository {
     private static final String FILE_PATH = "src/main/resources/recipes.txt";
     private static final String SEPARATOR = ";";
 
-    private List<Recipe> recipesCache; // Cache to avoid reading file every time
+    private List<Recipe> recipesCache;
 
     public RecipeRepository() {
         this.recipesCache = new ArrayList<>();

@@ -41,11 +41,11 @@ public class Order {
 
     public void addItem(OrderItem item) {
         this.items.add(item);
-        this.orderTotalPrice += item.getItemTotalPrice(); // Recalculate total when item is added
+        this.orderTotalPrice += item.getItemTotalPrice();
     }
 
     public void setItems(List<OrderItem> items) {
-        this.items = new ArrayList<>(items); // Create a new list to avoid external modification issues
+        this.items = new ArrayList<>(items);
         recalculateOrderTotalPrice();
     }
 

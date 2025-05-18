@@ -103,7 +103,7 @@ public class ChefAccessCustomerOrderHistorySteps {
         }
 
         this.viewedCustomerOrderHistory = orderService.getPastOrdersForCustomer(customerEmail);
-        if (this.viewedCustomerOrderHistory.isEmpty() && customer != null) { // Customer exists but no orders
+        if (this.viewedCustomerOrderHistory.isEmpty() && customer != null) {
             this.systemMessageToChef = customerEmail + " has no past orders";
         }
     }
@@ -124,7 +124,7 @@ public class ChefAccessCustomerOrderHistorySteps {
 
             assertThat(actualOrder).isNotNull();
             assertThat(actualOrder.getOrderDate().format(DateTimeFormatter.ISO_LOCAL_DATE)).isEqualTo(expectedRow.get("Order Date"));
-            // Assuming one item per order for simplicity based on the Gherkin table for this test
+
             assertThat(actualOrder.getItems()).isNotEmpty();
             assertThat(actualOrder.getItems().get(0).getMealName()).isEqualTo(expectedRow.get("Meal Name"));
             assertThat(actualOrder.getItems().get(0).getQuantity()).isEqualTo(Integer.parseInt(expectedRow.get("Quantity")));
@@ -137,9 +137,6 @@ public class ChefAccessCustomerOrderHistorySteps {
         assertThat(this.viewedCustomerOrderHistory).isNotNull();
 
         if (this.viewedCustomerOrderHistory.isEmpty()) {
-            // If no orders, cannot identify frequent meals. This might be an implicit pass or fail based on scenario.
-            // For this step, if no orders are displayed, and we expect to find a frequent meal, it should fail.
-            // If the test implies there *should* be a frequent meal, then viewedCustomerOrderHistory shouldn't be empty.
             assertThat(this.viewedCustomerOrderHistory.stream().anyMatch(o -> o.getItems().stream().anyMatch(i -> i.getMealName().equals(frequentlyOrderedMeal))))
                     .as("Expected to find meal '" + frequentlyOrderedMeal + "' in history to check frequency, but history is empty or meal not found.").isTrue();
             return;
@@ -168,7 +165,7 @@ public class ChefAccessCustomerOrderHistorySteps {
     @Then("the system should indicate to {string} that customer {string} was not found")
     public void the_system_should_indicate_to_that_customer_was_not_found(String chefName, String customerEmail) {
         assertThat(this.currentChef.getName()).isEqualTo(chefName);
-        assertThat(this.viewedCustomerOrderHistory).isEmpty(); // No orders will be retrieved if customer not found
+        assertThat(this.viewedCustomerOrderHistory).isEmpty();
         assertThat(this.systemMessageToChef).isEqualTo("Customer " + customerEmail + " was not found");
     }
 }

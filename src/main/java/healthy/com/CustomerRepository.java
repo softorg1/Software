@@ -16,7 +16,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class CustomerRepository {
-    private static final String FILE_PATH = "src/main/resources/customers.txt"; // تم تعديل المسار
+    private static final String FILE_PATH = "src/main/resources/customers.txt";
     private static final String SEPARATOR = ";";
     private static final String LIST_SEPARATOR = ",";
 

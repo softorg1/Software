@@ -150,7 +150,7 @@ public class TaskAssignmentSteps {
                 chefName
         );
         if (!this.lastAssignmentAttemptSuccessful) {
-            this.assignmentFailureDetails = "Expertise mismatch"; // Assuming this is the only reason for failure in this context
+            this.assignmentFailureDetails = "Expertise mismatch";
         }
     }
 
@@ -187,8 +187,7 @@ public class TaskAssignmentSteps {
     @Then("the assignment should fail due to expertise mismatch")
     public void the_assignment_should_fail_due_to_expertise_mismatch() {
         assertThat(this.lastAssignmentAttemptSuccessful).isFalse();
-        // We infer the reason is expertise mismatch based on the scenario setup
-        // The service now returns false, and we can check a specific message if the service provided one
+
     }
 
     @Then("the system should inform {string} that {string} may not be suitable for {string}")
@@ -201,8 +200,8 @@ public class TaskAssignmentSteps {
     public void chef_should_not_receive_a_notification_for_order(String chefName, String orderId) {
         Chef chef = kitchenManagementService.getChefDetails(chefName);
         assertThat(chef).isNotNull();
-        String taskIdentifier = "Order-" + orderId; // Assuming orderId is used in notification
-        if (orderId.startsWith("Order-")){ // if orderId already contains "Order-"
+        String taskIdentifier = "Order-" + orderId;
+        if (orderId.startsWith("Order-")){
             taskIdentifier = orderId;
         }
         final String finalTaskIdentifier = taskIdentifier;

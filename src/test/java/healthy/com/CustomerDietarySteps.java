@@ -1,4 +1,4 @@
-package healthy.com; // أو healthy.com.stepdefinitions إذا كان في مجلد فرعي
+package healthy.com;
 
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
@@ -6,13 +6,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.And;
 import io.cucumber.java.Before;
 
-// import healthy.com.repository.CustomerRepository; // تم حذف .repository
-// import healthy.com.service.CustomerService;    // تم حذف .service
-// لا حاجة لـ import إذا كانت الكلاسات في نفس الحزمة healthy.com
-// ولكن إذا كانت CustomerDietarySteps في حزمة فرعية مثل stepdefinitions، فستحتاج إلى:
-// import healthy.com.CustomerRepository;
-// import healthy.com.CustomerService;
-// import healthy.com.Customer;
+
 
 
 import java.io.IOException;
@@ -31,7 +25,7 @@ public class CustomerDietarySteps {
     @Before
     public void setUp() {
         try {
-            Files.deleteIfExists(Paths.get("src/main/resources/customers.txt")); // تم تعديل المسار
+            Files.deleteIfExists(Paths.get("src/main/resources/customers.txt"));
         } catch (IOException e) {
             System.err.println("Could not delete customers.txt before scenario: " + e.getMessage());
         }

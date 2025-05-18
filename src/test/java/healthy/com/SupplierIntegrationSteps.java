@@ -77,7 +77,6 @@ public class SupplierIntegrationSteps {
 
 
     public SupplierIntegrationSteps() {
-        // Initialization moved to field declaration or Background
     }
 
     @Given("the following suppliers are known to the system:")
@@ -107,7 +106,7 @@ public class SupplierIntegrationSteps {
                     Integer.parseInt(columns.get("Default Reorder Qty")),
                     columns.get("Unit"),
                     Integer.parseInt(columns.get("Critical Stock Level")),
-                    Integer.parseInt(columns.get("Current Stock")) // Read initial stock from Background
+                    Integer.parseInt(columns.get("Current Stock"))
             ));
         }
     }

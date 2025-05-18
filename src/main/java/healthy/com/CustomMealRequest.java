@@ -20,7 +20,7 @@ public class CustomMealRequest {
         this.selectedIngredients = new ArrayList<>();
         this.mealTags = new HashSet<>();
         this.totalPrice = 0.0;
-        this.creationSuccessful = false; // Default to false until finalized successfully
+        this.creationSuccessful = false;
     }
 
     public String getCustomerEmail() {

@@ -59,24 +59,19 @@ public class CustomerViewPastOrdersSteps {
         for (Map<String, String> columns : rows) {
             Order order = new Order(
                     columns.get("Order ID"),
-                    email, // Use the email from the step parameter
+                    email,
                     columns.get("Order Date"),
                     columns.get("Status")
             );
-            // For simplicity, assuming items are described by Meal Name and total for that item line
-            // In a real scenario, OrderItem objects would be more detailed
+
             OrderItem item = new OrderItem(
                     columns.get("Meal Name"),
-                    1, // Assuming quantity 1 for simplicity in this Gherkin table
-                    Double.parseDouble(columns.get("Total Price")), // Assuming this is item price for qty 1
+                    1,
+                    Double.parseDouble(columns.get("Total Price")),
                     Double.parseDouble(columns.get("Total Price"))
             );
             order.addItem(item);
-            // The Gherkin table for this step doesn't explicitly have an "Order Total Price"
-            // The Order class recalculates it when items are added, or it can be set.
-            // Let's ensure the Order's total matches the sum of its items here.
-            // If the Gherkin table had a specific "Order Total Price", we'd use that.
-            order.setOrderTotalPrice(Double.parseDouble(columns.get("Total Price"))); // Simulating the total for a single item order
+            order.setOrderTotalPrice(Double.parseDouble(columns.get("Total Price")));
 
             orderService.addOrderForTesting(order);
         }
@@ -84,8 +79,6 @@ public class CustomerViewPastOrdersSteps {
 
     @Given("the customer {string} has no past orders")
     public void the_customer_has_no_past_orders(String email) {
-        // No action needed here if orders are loaded on demand and file is empty
-        // Or ensure the list for this customer is empty
         List<Order> orders = orderService.getPastOrdersForCustomer(email);
         assertThat(orders).isEmpty();
     }
@@ -156,7 +149,7 @@ public class CustomerViewPastOrdersSteps {
     @Given("the system has a completed order {string} for customer {string}")
     public void the_system_has_a_completed_order_for_customer(String orderId, String customerEmail) {
         Order order = new Order(orderId, customerEmail, LocalDate.now().toString(), "Completed");
-        // Add a dummy item for simplicity or leave items empty if not specified
+
         orderService.addOrderForTesting(order);
     }
 }

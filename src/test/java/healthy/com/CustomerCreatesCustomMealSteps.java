@@ -1,4 +1,4 @@
-package healthy.com; // أو healthy.com.stepdefinitions
+package healthy.com;
 
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
@@ -56,7 +56,7 @@ public class CustomerCreatesCustomMealSteps {
             String tags = columns.get("Tags");
             this.backgroundIngredients.add(new Ingredient(name, price, tags));
         }
-        ingredientRepository.saveAllIngredients(this.backgroundIngredients); // Save to file
+        ingredientRepository.saveAllIngredients(this.backgroundIngredients);
     }
 
     @Given("a customer {string} is logged in")
@@ -85,7 +85,7 @@ public class CustomerCreatesCustomMealSteps {
         for (String ingredientName : selectedIngredientNames) {
             boolean addedSuccessfully = customMealService.addIngredientToCustomMeal(this.currentCustomMealRequest, ingredientName);
             if (!addedSuccessfully) {
-                // The failure reason is already set in mealRequest by the service
+
                 break;
             }
         }
@@ -120,7 +120,7 @@ public class CustomerCreatesCustomMealSteps {
         assertThat(this.currentCustomMealRequest.getMealName()).isEqualTo(mealName);
         double expectedPrice = 0;
         for(Ingredient ing : this.currentCustomMealRequest.getSelectedIngredients()){
-            Ingredient systemIng = ingredientRepository.findIngredientByName(ing.getName()); // get price from repo
+            Ingredient systemIng = ingredientRepository.findIngredientByName(ing.getName());
             if(systemIng != null) expectedPrice += systemIng.getPrice();
         }
         assertThat(this.currentCustomMealRequest.getTotalPrice()).isEqualTo(expectedPrice);

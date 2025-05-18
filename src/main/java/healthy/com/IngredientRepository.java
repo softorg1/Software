@@ -107,7 +107,7 @@ public class IngredientRepository {
     }
 
     public void updateIngredient(Ingredient ingredientToUpdate) {
-        List<Ingredient> allIngredients = getAllIngredients(); // Loads from file if cache is empty
+        List<Ingredient> allIngredients = getAllIngredients();
         boolean found = false;
         for (int i = 0; i < allIngredients.size(); i++) {
             if (allIngredients.get(i).getName().equals(ingredientToUpdate.getName())) {
@@ -117,7 +117,7 @@ public class IngredientRepository {
             }
         }
         if (!found) {
-            allIngredients.add(ingredientToUpdate); // Add if not found
+            allIngredients.add(ingredientToUpdate);
         }
         saveAllIngredients(allIngredients);
     }

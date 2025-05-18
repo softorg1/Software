@@ -18,8 +18,8 @@ import java.util.Optional;
 public class SupplierRepository {
     private static final String FILE_PATH = "src/main/resources/suppliers.txt";
     private static final String SEPARATOR = ";";
-    private static final String PRICE_SEPARATOR = ":"; // For item:price pairs
-    private static final String PRICE_LIST_SEPARATOR = ","; // For multiple item:price pairs
+    private static final String PRICE_SEPARATOR = ":";
+    private static final String PRICE_LIST_SEPARATOR = ",";
 
     public SupplierRepository() {
         try {

@@ -8,7 +8,7 @@ public class Supplier {
     private String id;
     private String name;
     private String contactEmail;
-    private Map<String, Double> itemPrices; // Ingredient name -> Price
+    private Map<String, Double> itemPrices;
 
     public Supplier(String id, String name, String contactEmail) {
         this.id = id;

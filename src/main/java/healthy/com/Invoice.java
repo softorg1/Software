@@ -18,7 +18,7 @@ public class Invoice {
     private String paymentStatus;
 
     public Invoice(String orderId, String customerEmail, List<OrderItem> orderItems, double orderTotalAmount, String orderPaymentStatus) {
-        this.invoiceId = "INV-" + orderId; // <<--- تم التعديل هنا لجعل معرف الفاتورة متوقعًا
+        this.invoiceId = "INV-" + orderId;
         this.orderId = orderId;
         this.customerEmail = customerEmail;
         this.invoiceDate = LocalDate.now();
