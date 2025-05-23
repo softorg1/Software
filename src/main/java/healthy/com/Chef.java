@@ -75,13 +75,12 @@ public class Chef {
         return new ArrayList<>(assignedTasks);
     }
 
-    public void addTask(KitchenTask task) {
-        if (task != null) {
-            if (this.assignedTasks.stream().noneMatch(t -> t.getTaskId().equals(task.getTaskId()))) {
-                this.assignedTasks.add(task);
-            }
-        }
+public void addTask(KitchenTask task) {
+    if (task != null && this.assignedTasks.stream().noneMatch(t -> t.getTaskId().equals(task.getTaskId()))) {
+        this.assignedTasks.add(task);
     }
+}
+
 
     public void clearTasks() {
         this.assignedTasks.clear();
