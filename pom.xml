@@ -8,12 +8,11 @@
     <artifactId>Restaurant</artifactId>
     <version>1.0-SNAPSHOT</version>
 
-         <properties>
-  <sonar.organization>softorg1</sonar.organization>
-  <sonar.host.url>https://sonarcloud.io</sonar.host.url>
-</properties>
+    
 
     <properties>
+              <sonar.organization>softorg1</sonar.organization>
+  <sonar.host.url>https://sonarcloud.io</sonar.host.url>
         <maven.compiler.source>21</maven.compiler.source>
         <maven.compiler.target>21</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
